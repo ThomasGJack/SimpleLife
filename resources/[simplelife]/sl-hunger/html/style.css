@@ -1,0 +1,75 @@
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+html, body {
+  width: 100%; height: 100%;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* ===============================================================
+   HUD minimaliste : 3 stats en ROW, sans backdrop, juste icône + chiffre
+   avec text-shadow pour la lisibilité sur n'importe quel fond.
+   Quasi invisible quand tout va bien, devient visible quand bas.
+   =============================================================== */
+.hud {
+  position: fixed;
+  top: 12px;
+  left: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+/* Au moins une stat est "warning" → on remonte un peu l'opacité globale */
+.hud.has-warning  { opacity: 0.75; }
+.hud.has-critical { opacity: 1.0; }
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.25s ease, transform 0.15s ease;
+}
+.stat-icon {
+  font-size: 12px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.85));
+  opacity: 0.85;
+}
+.stat-val {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+/* États selon niveau — couleurs progressives */
+.stat.level-green  { display: none; }   /* > 60 % : on cache complètement */
+.stat.level-yellow .stat-val { color: rgba(255, 255, 255, 0.85); }
+.stat.level-orange .stat-val { color: #fdba74; }
+.stat.level-orange .stat-icon { opacity: 1; }
+.stat.level-red    .stat-val {
+  color: #fca5a5;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 0 6px rgba(239, 68, 68, 0.6);
+}
+.stat.level-red .stat-icon {
+  opacity: 1;
+  animation: critPulse 1.3s ease-in-out infinite;
+}
+
+@keyframes critPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.18); opacity: 1; }
+}

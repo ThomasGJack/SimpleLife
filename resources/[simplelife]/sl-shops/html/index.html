@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root" class="root hidden" data-theme="green">
+    <div class="overlay" id="overlay"></div>
+
+    <div class="window">
+      <header class="head">
+        <div class="head-left">
+          <div class="shop-icon" id="shop-icon">🛒</div>
+          <div class="head-titles">
+            <div class="shop-name" id="shop-name">Boutique</div>
+            <div class="shop-tag" id="shop-tag">Items disponibles</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="balance">
+            <div class="balance-row">
+              <span class="balance-label">CASH</span>
+              <span class="balance-val" id="bal-cash">$0</span>
+            </div>
+            <div class="balance-row">
+              <span class="balance-label">BANK</span>
+              <span class="balance-val bank" id="bal-bank">$0</span>
+            </div>
+          </div>
+          <button class="btn-close" id="btn-close" title="Esc">✕</button>
+        </div>
+      </header>
+
+      <main class="body">
+        <div class="grid" id="grid"></div>
+      </main>
+
+      <footer class="foot">
+        <div class="hint">
+          <span class="kbd">+ / -</span> ajuster la quantité ·
+          <span class="kbd">Acheter</span> confirme l'achat ·
+          <span class="kbd">Esc</span> fermer
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

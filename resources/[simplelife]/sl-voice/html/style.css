@@ -1,0 +1,115 @@
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+html, body {
+  width: 100%; height: 100%;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+:root {
+  --accent: #4ade80;
+  --bg: rgba(8, 6, 4, 0.78);
+  --border: rgba(255, 176, 0, 0.18);
+  --border-strong: rgba(255, 176, 0, 0.35);
+  --text: #e8d9b8;
+  --text-mute: #8a7a5a;
+  --grunge: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+}
+
+/* HUD bottom-right au-dessus du HUD sl-hud */
+.voice-hud {
+  position: fixed;
+  bottom: 240px;     /* configurable depuis le Lua si besoin */
+  right: 24px;
+  width: 196px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background:
+    var(--grunge),
+    linear-gradient(180deg, rgba(22,19,16,0.86), rgba(10,9,7,0.86));
+  background-blend-mode: overlay, normal;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  font-family: 'Roboto Condensed', sans-serif;
+  color: var(--text);
+  transition: border-left-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* Pulse vert / orange / bleu quand on parle */
+.voice-hud[data-talking="true"] {
+  border-left-color: var(--accent);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.6),
+    0 0 18px var(--accent),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  animation: voicePulse 0.9s ease-in-out infinite;
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px var(--accent), inset 0 1px 0 rgba(255,255,255,0.06); }
+  50%      { box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 26px var(--accent), inset 0 1px 0 rgba(255,255,255,0.06); }
+}
+
+.voice-icon {
+  font-size: 24px;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.7));
+}
+
+.voice-meta {
+  flex: 1;
+  display: flex; flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.voice-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.voice-distance {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.voice-unit {
+  color: var(--text-mute);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.voice-pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.35;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.voice-hud[data-talking="true"] .voice-pulse {
+  opacity: 1;
+  animation: dotPulse 0.6s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.6); opacity: 0.4; }
+}

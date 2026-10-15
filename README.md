@@ -70,6 +70,10 @@ résolus et validés côté serveur, jamais confiés au client).
 
 ## 🏗️ Architecture
 
+<p align="center">
+  <img src="docs/architecture.svg" alt="Architecture modulaire SimpleLife" width="100%">
+</p>
+
 ```
                 ┌─────────────────────────────────────────────┐
                 │                  sl_core                     │
@@ -111,6 +115,28 @@ sont triées **topologiquement** (header `-- requires:`) et appliquées **une se
 | **sl_minimap** | Minimap « propre » : retire les barres vie/armure natives + le réticule rouge (scaleforms streamés — *assets non inclus*). |
 | **sl_admin** | Menu **admin F10** (ACE `sl.admin`, re-check serveur sur chaque action) : argent, armes, véhicules, items, joueurs, self, noclip + **Dev/Test** (boutiques, concessions, crypto…). |
 | **sl_sounds** | Pack de **remplacement de sons** (armes) via `AUDIO_WAVEPACK` (*assets `.awc` non inclus*). |
+
+---
+
+### 🧩 Branche RP modulaire (`sl-*`)
+
+En plus de la branche lean‑core ci‑dessus, le dépôt contient une **seconde génération** de modules
+`sl-*` (tiret) : un framework RP complet au style visuel **grunge GTA‑V**, dont le contrat
+d'intégration est figé dans [`INTEGRATION.md`](resources/%5Bsimplelife%5D/INTEGRATION.md) (events
+partagés `sl:MODULE:EVENT`, exports publics, items, tables SQL). Même principe : un noyau `sl-core`
+autoritaire + des modules branchés par exports / bus.
+
+| Domaine | Modules |
+|---|---|
+| **Noyau / plateforme** | `sl-core` · `sl-interact` · `sl-keybinds` · `sl-loadingscreen` · `sl-dlc` · `sl-blips` · `sl-curator` |
+| **Économie & items** | `sl-economy` · `sl-inventory` · `sl-crafting` |
+| **Métiers & services** | `sl-jobs` · `sl-jobmissions` · `sl-police` · `sl-ems` · `sl-skills` |
+| **Monde & crime** | `sl-vehicles` · `sl-fuel` · `sl-properties` · `sl-crime` · `sl-gangs` · `sl-weapons` |
+| **Survie & perso** | `sl-death` · `sl-hunger` · `sl-hud` · `sl-clothing` |
+| **Communication** | `sl-phone` · `sl-voice` |
+
+> ⚠️ Les deux branches (`sl_*` Liquid Glass et `sl-*` grunge) sont des **approches distinctes** du
+> même projet SimpleLife — prévues pour être activées **une seule à la fois** sur un serveur.
 
 ---
 

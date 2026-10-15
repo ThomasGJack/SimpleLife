@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Toast host (au-dessus du téléphone, toujours dans le DOM) -->
+  <div id="toast-host" aria-live="polite"></div>
+
+  <!-- Phone wrapper : positionnement bord droit -->
+  <div id="phone" class="phone hidden">
+    <div class="phone-chrome">
+
+      <!-- Notch -->
+      <div class="phone-notch"></div>
+
+      <!-- Status bar (heure + signal/wifi/batterie) -->
+      <div class="status-bar">
+        <span class="status-time" id="status-time">--:--</span>
+        <span class="status-right">
+          <span class="status-icon">●●●●</span>
+          <span class="status-icon">📶</span>
+          <span class="status-batt">100</span>
+        </span>
+      </div>
+
+      <!-- Body : contient les screens empilées (1 visible à la fois) -->
+      <div class="phone-body" id="phone-body">
+
+        <!-- ============ HOME ============ -->
+        <div class="screen screen-home active" data-screen="home">
+          <div class="home-top">
+            <div class="home-date" id="home-date">Lundi 1 janvier</div>
+            <div class="home-time" id="home-time">12:00</div>
+          </div>
+          <div class="home-number">
+            <span class="home-number-label">Mon numéro</span>
+            <span class="home-number-value" id="home-number-value">--</span>
+          </div>
+          <div class="apps-grid" id="apps-grid"></div>
+        </div>
+
+        <!-- ============ MESSAGES (list) ============ -->
+        <div class="screen" data-screen="messages">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">‹</button>
+            <span class="app-title">Messages</span>
+            <button class="action-btn" id="new-conv-btn">＋</button>
+          </div>
+          <div class="app-body">
+            <div class="conv-list" id="conv-list"></div>
+            <div class="empty-state" id="conv-empty">
+              <div class="empty-icon">💬</div>
+              <div class="empty-text">Aucune conversation</div>
+              <div class="empty-sub">Touchez + pour démarrer une discussion</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ CHAT (sub-screen of messages) ============ -->
+        <div class="screen" data-screen="chat">
+          <div class="app-header">
+            <button class="back-btn" data-back="messages">‹</button>
+            <div class="chat-peer">
+              <div class="chat-peer-name" id="chat-peer-name">--</div>
+              <div class="chat-peer-number" id="chat-peer-number">--</div>
+            </div>
+            <button class="action-btn chat-call-btn" id="chat-call-btn">📞</button>
+          </div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-composer">
+            <input type="text" id="chat-input" placeholder="Message…" maxlength="500">
+            <button id="chat-send" class="send-btn">↑</button>
+          </div>
+        </div>
+
+        <!-- ============ CONTACTS ============ -->
+        <div class="screen" data-screen="contacts">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">‹</button>
+            <span class="app-title">Contacts</span>
+            <button class="action-btn" id="new-contact-btn">＋</button>
+          </div>
+          <div class="app-body">
+            <div class="contacts-list" id="contacts-list"></div>
+            <div class="empty-state" id="contacts-empty">
+              <div class="empty-icon">👥</div>
+              <div class="empty-text">Aucun contact</div>
+              <div class="empty-sub">Touchez + pour ajouter</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ TELEPHONE (dialer + recents) ============ -->
+        <div class="screen" data-screen="phone">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">‹</button>
+            <span class="app-title">Téléphone</span>
+            <span class="action-btn ghost"></span>
+          </div>
+          <div class="phone-tabs">
+            <button class="phone-tab active" data-tab="dialer">Clavier</button>
+            <button class="phone-tab" data-tab="recents">Récents</button>
+          </div>
+
+          <div class="phone-tab-body active" data-tab-body="dialer">
+            <div class="dialer-display" id="dialer-display"></div>
+            <div class="dialer-keys" id="dialer-keys">
+              <button class="dial-key" data-digit="1"><span class="dk-d">1</span><span class="dk-s"> </span></button>
+              <button class="dial-key" data-digit="2"><span class="dk-d">2</span><span class="dk-s">ABC</span></button>
+              <button class="dial-key" data-digit="3"><span class="dk-d">3</span><span class="dk-s">DEF</span></button>
+              <button class="dial-key" data-digit="4"><span class="dk-d">4</span><span class="dk-s">GHI</span></button>
+              <button class="dial-key" data-digit="5"><span class="dk-d">5</span><span class="dk-s">JKL</span></button>
+              <button class="dial-key" data-digit="6"><span class="dk-d">6</span><span class="dk-s">MNO</span></button>
+              <button class="dial-key" data-digit="7"><span class="dk-d">7</span><span class="dk-s">PQRS</span></button>
+              <button class="dial-key" data-digit="8"><span class="dk-d">8</span><span class="dk-s">TUV</span></button>
+              <button class="dial-key" data-digit="9"><span class="dk-d">9</span><span class="dk-s">WXYZ</span></button>
+              <button class="dial-key dial-blank"></button>
+              <button class="dial-key" data-digit="0"><span class="dk-d">0</span><span class="dk-s">+</span></button>
+              <button class="dial-key dial-back" id="dial-back">⌫</button>
+            </div>
+            <div class="dialer-actions">
+              <button class="call-btn" id="dialer-call">📞 Appeler</button>
+            </div>
+          </div>
+
+          <div class="phone-tab-body" data-tab-body="recents">
+            <div class="recents-list" id="recents-list"></div>
+            <div class="empty-state" id="recents-empty">
+              <div class="empty-icon">📞</div>
+              <div class="empty-text">Aucun appel récent</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ BANQUE MOBILE ============ -->
+        <div class="screen" data-screen="bank">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">&#8249;</button>
+            <span class="app-title">Banque</span>
+            <span class="action-btn ghost"></span>
+          </div>
+          <div class="app-body">
+            <div class="bank-balances" id="bank-balances">
+              <!-- injecte par JS -->
+            </div>
+            <div class="bank-transfer-section">
+              <div class="bank-transfer-title">Virement</div>
+              <div class="bank-input-row">
+                <label>Numero destinataire</label>
+                <input type="tel" id="bank-to-number" inputmode="tel" placeholder="(555) 123-4567" maxlength="14">
+              </div>
+              <div class="bank-input-row">
+                <label>Compte</label>
+                <select id="bank-account">
+                  <option value="cash">Especes</option>
+                  <option value="bank">Banque</option>
+                  <option value="crypto">Crypto</option>
+                </select>
+              </div>
+              <div class="bank-input-row">
+                <label>Montant ($)</label>
+                <input type="number" id="bank-amount" inputmode="numeric" placeholder="0" min="1">
+              </div>
+              <div class="bank-input-row">
+                <label>Motif (optionnel)</label>
+                <input type="text" id="bank-reason" maxlength="64" placeholder="ex: loyer, pret...">
+              </div>
+              <button class="bank-btn" id="bank-transfer-btn">Effectuer le virement</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ RESEAU SOCIAL ============ -->
+        <div class="screen" data-screen="social">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">&#8249;</button>
+            <span class="app-title">Social</span>
+            <button class="action-btn" id="social-new-btn">&#43;</button>
+          </div>
+          <div class="social-feed app-body" id="social-feed">
+            <!-- injecte par JS -->
+          </div>
+          <div class="social-compose-bar" id="social-compose-bar" style="display:none;">
+            <input type="text" id="social-compose-input" placeholder="Quoi de neuf ?" maxlength="280">
+            <button class="send-btn" id="social-compose-send">&#8593;</button>
+          </div>
+        </div>
+
+        <!-- ============ MARKETPLACE ============ -->
+        <div class="screen" data-screen="market">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">&#8249;</button>
+            <span class="app-title">Annonces</span>
+            <button class="action-btn market-add-btn" id="market-new-btn">&#43;</button>
+          </div>
+          <div class="app-body">
+            <div class="market-list" id="market-list">
+              <!-- injecte par JS -->
+            </div>
+            <div class="empty-state" id="market-empty">
+              <div class="empty-icon">&#128722;</div>
+              <div class="empty-text">Aucune annonce</div>
+              <div class="empty-sub">Touchez + pour publier</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ URGENCES 911 / SAMU ============ -->
+        <div class="screen" data-screen="emergency">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">&#8249;</button>
+            <span class="app-title">Urgences</span>
+            <span class="action-btn ghost"></span>
+          </div>
+          <div class="app-body">
+            <div class="emergency-screen">
+              <div class="emergency-header-text">
+                <span class="em-icon">&#128680;</span>
+                <div class="em-title">Appel d&#39;urgence</div>
+                <div class="em-sub">Choisissez le service et decrivez votre situation.</div>
+              </div>
+              <div class="emergency-service-select">
+                <button class="emergency-service-btn active" data-service="police">
+                  <span class="svc-icon">&#128682;</span>
+                  <span class="svc-label">Police</span>
+                </button>
+                <button class="emergency-service-btn" data-service="ambulance">
+                  <span class="svc-icon">&#128657;</span>
+                  <span class="svc-label">SAMU</span>
+                </button>
+              </div>
+              <div class="emergency-msg-section">
+                <label>Votre message</label>
+                <textarea id="emergency-message" placeholder="Decrivez l&#39;urgence, votre position..." maxlength="255"></textarea>
+              </div>
+              <button class="emergency-send-btn" id="emergency-send-btn">&#128680; Envoyer l&#39;alerte</button>
+              <div class="emergency-history">
+                <div class="emergency-history-title">Derniers appels envoyes</div>
+                <div id="emergency-history-list">
+                  <div class="emergency-history-item" style="color:var(--text-3);">Aucun appel recemment.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ REGLAGES ============ -->
+        <div class="screen" data-screen="settings">
+          <div class="app-header">
+            <button class="back-btn" data-back="home">‹</button>
+            <span class="app-title">Réglages</span>
+            <span class="action-btn ghost"></span>
+          </div>
+          <div class="app-body settings-body">
+            <div class="settings-section">
+              <div class="settings-label">MON NUMÉRO</div>
+              <div class="settings-value-big" id="settings-number">--</div>
+            </div>
+            <div class="settings-section">
+              <div class="settings-label">À PROPOS</div>
+              <div class="settings-row"><span>Modèle</span><span>SimplePhone</span></div>
+              <div class="settings-row"><span>Version</span><span>0.1.0</span></div>
+              <div class="settings-row"><span>OS</span><span>SimpleOS</span></div>
+            </div>
+            <div class="settings-section">
+              <div class="settings-label">RACCOURCIS</div>
+              <div class="settings-row"><span>Ouvrir</span><span class="kbd">F1</span></div>
+              <div class="settings-row"><span>Fermer</span><span class="kbd">Esc</span></div>
+              <div class="settings-row"><span>Holster</span><span class="kbd">H</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ CALL SCREEN (overlay) ============ -->
+        <div class="screen call-screen" data-screen="call">
+          <div class="call-bg"></div>
+          <div class="call-content">
+            <div class="call-status" id="call-status">Appel</div>
+            <div class="call-peer" id="call-peer">--</div>
+            <div class="call-avatar">👤</div>
+            <div class="call-timer" id="call-timer"></div>
+            <div class="call-actions" id="call-actions">
+              <!-- buttons injectés selon le statut -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Home indicator (barre du bas iPhone) -->
+      <div class="home-indicator" id="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- =============================================================== -->
+  <!-- MODAL : Nouvelle conversation / Nouveau contact / Edit contact   -->
+  <!-- =============================================================== -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-header" id="modal-title">Titre</div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="modal-cancel">Annuler</button>
+        <button class="btn-primary" id="modal-confirm">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

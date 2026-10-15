@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root" class="root hidden">
+    <aside class="panel">
+      <header class="head">
+        <div class="head-title">
+          <span class="head-emoji">🛠️</span>
+          <div class="head-titles">
+            <div class="head-name">SimpleLife Admin</div>
+            <div class="head-sub">Console de debug et d'administration</div>
+          </div>
+        </div>
+        <button class="btn-close" id="btn-close" title="Esc">✕</button>
+      </header>
+
+      <nav class="tabs" id="tabs"></nav>
+
+      <main class="body" id="body"></main>
+
+      <footer class="foot">
+        <span class="kbd">F7</span> ouvrir/fermer ·
+        <span class="kbd">Esc</span> fermer
+      </footer>
+    </aside>
+
+    <!-- Modal pour input dialogs (give item, give money custom) -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-header" id="modal-title">Action</div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-actions">
+          <button class="btn-ghost" id="modal-cancel">Annuler</button>
+          <button class="btn-primary" id="modal-confirm">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast host (notifications) -->
+    <div id="toast-host"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

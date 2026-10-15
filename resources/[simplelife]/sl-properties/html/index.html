@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sl-properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       ÉCRAN : AGENCE IMMOBILIÈRE
+       ====================================================== -->
+  <div id="agency-root" class="prop-root hidden">
+    <div class="prop-overlay" id="agency-overlay"></div>
+    <div class="prop-window">
+      <!-- Header -->
+      <div class="prop-head">
+        <div class="head-l">
+          <div class="head-title">Agence Immobilière</div>
+          <div class="head-sub">Biens disponibles à l'achat</div>
+        </div>
+        <div class="head-r">
+          <button class="btn-x" id="agency-close">✕</button>
+        </div>
+      </div>
+
+      <!-- Corps : liste des propriétés + mes biens -->
+      <div class="agency-body">
+
+        <!-- Panneau gauche : disponibles -->
+        <div class="agency-panel">
+          <div class="panel-title">Disponibles</div>
+          <div class="prop-list" id="available-list">
+            <!-- injecté par JS -->
+          </div>
+        </div>
+
+        <!-- Panneau droit : mes biens -->
+        <div class="agency-panel">
+          <div class="panel-title">Mes propriétés</div>
+          <div class="prop-list" id="owned-list">
+            <!-- injecté par JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="prop-foot">
+        <span class="foot-hint">
+          <span class="kbd">E</span> Sélectionner &nbsp;|&nbsp;
+          <span class="kbd">Échap</span> Fermer
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       ÉCRAN : COFFRE PERSONNEL
+       ====================================================== -->
+  <div id="stash-root" class="prop-root hidden">
+    <div class="prop-overlay" id="stash-overlay"></div>
+    <div class="prop-window stash-window">
+      <!-- Header -->
+      <div class="prop-head">
+        <div class="head-l">
+          <div class="head-title" id="stash-title">Coffre</div>
+          <div class="head-sub" id="stash-sub">Coffre personnel</div>
+        </div>
+        <div class="head-c">
+          <!-- Poids coffre -->
+          <div class="weight">
+            <div class="weight-label">POIDS COFFRE</div>
+            <div class="weight-track">
+              <div class="weight-fill" id="stash-weight-fill"></div>
+            </div>
+            <div class="weight-text">
+              <span id="stash-weight-cur">0.000</span> / <span id="stash-weight-max">30.000</span> kg
+            </div>
+          </div>
+        </div>
+        <div class="head-r">
+          <button class="btn-x" id="stash-close">✕</button>
+        </div>
+      </div>
+
+      <!-- Corps : grille coffre -->
+      <div class="stash-body">
+        <div class="stash-grid" id="stash-grid">
+          <!-- injecté par JS -->
+        </div>
+      </div>
+
+      <!-- Panneau action (retrait quantité) -->
+      <div class="stash-action" id="stash-action">
+        <div class="action-title">Action sur slot <span id="action-slot-num">—</span></div>
+        <div class="action-row">
+          <span class="action-label">Qté :</span>
+          <input class="action-qty" id="action-qty" type="number" min="1" value="1" />
+          <button class="action-btn btn-withdraw" id="btn-withdraw">Retirer</button>
+          <button class="action-btn btn-cancel"   id="btn-cancel">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="prop-foot">
+        <span class="foot-hint">
+          <span class="kbd">Clic G</span> Retirer &nbsp;|&nbsp;
+          <span class="kbd">Clic D</span> Déposer item sélectionné &nbsp;|&nbsp;
+          <span class="kbd">Échap</span> Fermer
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast host (au-dessus de tout) -->
+  <div id="toast-host"></div>
+
+  <!-- Tooltip -->
+  <div class="tip hidden" id="tip">
+    <div class="tip-head">
+      <div class="tip-icon" id="tip-icon">📦</div>
+      <div class="tip-titles">
+        <div class="tip-name" id="tip-name">—</div>
+        <div class="tip-cat"  id="tip-cat">—</div>
+      </div>
+    </div>
+    <div class="tip-desc" id="tip-desc">—</div>
+    <div class="tip-stats">
+      <div class="tip-row"><span class="tip-k">QUANTITÉ</span><span class="tip-v" id="tip-count">x1</span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

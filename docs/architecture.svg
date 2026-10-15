@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#121a24"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5bc0f0"/><stop offset="1" stop-color="#2b83c9"/>
+    </linearGradient>
+    <clipPath id="ar"><rect x="0" y="0" width="1200" height="780" rx="24"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#ar)">
+    <rect x="0" y="0" width="1200" height="780" fill="url(#abg)"/>
+
+    <!-- titre -->
+    <text x="600" y="52" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">SimpleLife — architecture modulaire</text>
+    <text x="600" y="82" text-anchor="middle" font-size="15" fill="#7e97a9">un noyau autoritaire · des modules branchés par exports + bus d'events · aucun accès DB direct</text>
+
+    <!-- connecteurs core -> clusters -->
+    <g stroke="#3ba9e0" stroke-opacity="0.45" stroke-width="2">
+      <line x1="450" y1="406" x2="340" y2="200"/>
+      <line x1="450" y1="406" x2="340" y2="408"/>
+      <line x1="450" y1="406" x2="340" y2="616"/>
+      <line x1="750" y1="406" x2="860" y2="200"/>
+      <line x1="750" y1="406" x2="860" y2="408"/>
+      <line x1="750" y1="406" x2="860" y2="616"/>
+    </g>
+
+    <!-- CORE -->
+    <g>
+      <rect x="450" y="348" width="300" height="116" rx="18" fill="url(#core)"/>
+      <rect x="450" y="348" width="300" height="58" rx="18" fill="#ffffff" opacity="0.14"/>
+      <text x="600" y="398" text-anchor="middle" font-size="34" font-weight="800" fill="#ffffff">sl&#8209;core</text>
+      <text x="600" y="430" text-anchor="middle" font-size="12.5" fill="#eaf6ff">DB · migrations · joueurs · bus · économie · registry</text>
+    </g>
+
+    <!-- helper clusters : rect + header + 2 lignes -->
+    <!-- C1 top-left -->
+    <g>
+      <rect x="40" y="125" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="60" y="158" font-size="17" font-weight="700" fill="#7fc8ef">Identité &amp; interface</text>
+      <text x="60" y="192" font-size="15" fill="#c3d3df">identity · clothing · interact</text>
+      <text x="60" y="220" font-size="15" fill="#c3d3df">ui · loadingscreen</text>
+      <text x="60" y="248" font-size="15" fill="#c3d3df">keybinds · blips</text>
+    </g>
+    <!-- C2 top-right -->
+    <g>
+      <rect x="860" y="125" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="880" y="158" font-size="17" font-weight="700" fill="#7fc8ef">Économie &amp; inventaire</text>
+      <text x="880" y="192" font-size="15" fill="#c3d3df">economy · bank</text>
+      <text x="880" y="220" font-size="15" fill="#c3d3df">inventory · shops</text>
+      <text x="880" y="248" font-size="15" fill="#c3d3df">crafting</text>
+    </g>
+    <!-- C3 mid-left -->
+    <g>
+      <rect x="40" y="333" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="60" y="366" font-size="17" font-weight="700" fill="#7fc8ef">Métiers &amp; services</text>
+      <text x="60" y="400" font-size="15" fill="#c3d3df">jobs · jobmissions</text>
+      <text x="60" y="428" font-size="15" fill="#c3d3df">police · ems</text>
+      <text x="60" y="456" font-size="15" fill="#c3d3df">skills</text>
+    </g>
+    <!-- C4 mid-right -->
+    <g>
+      <rect x="860" y="333" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="880" y="366" font-size="17" font-weight="700" fill="#7fc8ef">Véhicules &amp; propriétés</text>
+      <text x="880" y="400" font-size="15" fill="#c3d3df">vehicles · fuel</text>
+      <text x="880" y="428" font-size="15" fill="#c3d3df">properties</text>
+      <text x="880" y="456" font-size="15" fill="#c3d3df">weapons</text>
+    </g>
+    <!-- C5 bottom-left -->
+    <g>
+      <rect x="40" y="541" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="60" y="574" font-size="17" font-weight="700" fill="#7fc8ef">Survie &amp; HUD</text>
+      <text x="60" y="608" font-size="15" fill="#c3d3df">death · hunger</text>
+      <text x="60" y="636" font-size="15" fill="#c3d3df">hud</text>
+      <text x="60" y="664" font-size="15" fill="#c3d3df">needs (faim/soif)</text>
+    </g>
+    <!-- C6 bottom-right -->
+    <g>
+      <rect x="860" y="541" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="880" y="574" font-size="17" font-weight="700" fill="#7fc8ef">Crime · comms · admin</text>
+      <text x="880" y="608" font-size="15" fill="#c3d3df">crime · gangs</text>
+      <text x="880" y="636" font-size="15" fill="#c3d3df">phone · voice</text>
+      <text x="880" y="664" font-size="15" fill="#c3d3df">admin</text>
+    </g>
+
+    <!-- légende -->
+    <text x="600" y="742" text-anchor="middle" font-size="13.5" fill="#6b8193">exports (colon / bracket) + events <tspan fill="#9fb8c8">sl:MODULE:EVENT</tspan> via le bus — deux branches : lean-core <tspan fill="#9fb8c8">sl_*</tspan> (Liquid Glass) &amp; RP modulaire <tspan fill="#9fb8c8">sl-*</tspan> (grunge GTA-V)</text>
+  </g>
+  <rect x="0.5" y="0.5" width="1199" height="779" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.10"/>
+</svg>

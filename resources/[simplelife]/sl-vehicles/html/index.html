@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sl-vehicles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================
+     CONCESSION
+     ============================ -->
+<div id="veh-root" class="veh-root hidden">
+  <div class="veh-overlay" id="veh-overlay"></div>
+
+  <div class="veh-window" id="veh-window">
+    <!-- Header -->
+    <div class="veh-head">
+      <div class="head-l">
+        <div class="head-title">Concession PDM</div>
+        <div class="head-sub">Premium Deluxe Motorsport</div>
+      </div>
+      <div class="head-r">
+        <button class="btn-x" id="btn-close-concession" title="Fermer">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- Body : sidebar + grille -->
+    <div class="veh-body">
+      <!-- Sidebar categories -->
+      <div class="veh-sidebar" id="veh-sidebar">
+        <div class="sidebar-title">Categories</div>
+        <!-- Rempli par JS -->
+      </div>
+
+      <!-- Grille vehicules -->
+      <div class="veh-grid-wrap">
+        <div class="veh-grid" id="veh-grid">
+          <!-- Rempli par JS -->
+        </div>
+      </div>
+
+      <!-- Panel detail / preview -->
+      <div class="veh-detail" id="veh-detail">
+        <div class="detail-empty" id="detail-empty">
+          <div class="detail-empty-icon">&#x1F697;</div>
+          <div class="detail-empty-text">Selectionnez un vehicule</div>
+        </div>
+        <div class="detail-content hidden" id="detail-content">
+          <div class="detail-label" id="detail-label">—</div>
+          <div class="detail-cat"   id="detail-cat">—</div>
+          <div class="detail-model" id="detail-model">—</div>
+          <div class="detail-price-row">
+            <span class="detail-price-label">PRIX</span>
+            <span class="detail-price" id="detail-price">—</span>
+          </div>
+          <button class="btn-buy" id="btn-buy">Acheter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="veh-foot">
+      <span class="foot-hint"><span class="kbd">E</span> Selectionner &nbsp;|&nbsp; <span class="kbd">Esc</span> Fermer</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     GARAGE
+     ============================ -->
+<div id="garage-root" class="veh-root hidden">
+  <div class="veh-overlay" id="garage-overlay"></div>
+
+  <div class="veh-window" id="garage-window">
+    <!-- Header -->
+    <div class="veh-head">
+      <div class="head-l">
+        <div class="head-title">Garage</div>
+        <div class="head-sub">Vehicules personnels</div>
+      </div>
+      <div class="head-r">
+        <button class="btn-x" id="btn-close-garage" title="Fermer">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- Body : liste -->
+    <div class="garage-body">
+      <div class="garage-empty hidden" id="garage-empty">
+        <div class="detail-empty-icon">&#x1F697;</div>
+        <div class="detail-empty-text">Aucun vehicule possede</div>
+      </div>
+      <div class="garage-list" id="garage-list">
+        <!-- Rempli par JS -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="veh-foot">
+      <span class="foot-hint"><span class="kbd">Sortir</span> Spawner &nbsp;|&nbsp; <span class="kbd">Rentrer</span> Ranger &nbsp;|&nbsp; <span class="kbd">Esc</span> Fermer</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     TOAST HOST
+     ============================ -->
+<div id="toast-host"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

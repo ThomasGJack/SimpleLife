@@ -1,0 +1,2 @@
+SL_CORE_VERSION = '0.1.0'
+SL_CORE_API = 1

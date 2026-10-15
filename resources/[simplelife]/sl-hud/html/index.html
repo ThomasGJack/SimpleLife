@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hud" class="hud hidden">
+    <div class="identity-strip">
+      <div class="ident-name" id="name">—</div>
+      <div class="ident-cid" id="citizen-id">—</div>
+    </div>
+
+    <div class="job-strip" id="job-strip">
+      <div class="job-icon" id="job-icon">💼</div>
+      <div class="job-meta">
+        <div class="job-name" id="job-name">Sans emploi</div>
+        <div class="job-grade" id="job-grade">—</div>
+      </div>
+      <div class="duty-badge off" id="duty-badge">OFF</div>
+    </div>
+
+    <div class="money-stack">
+      <div class="money-row cash" id="row-cash">
+        <div class="money-icon">💵</div>
+        <div class="money-info">
+          <div class="money-label">Liquide</div>
+          <div class="money-value"><span id="cash">0</span><span class="money-currency">$</span></div>
+        </div>
+      </div>
+
+      <div class="money-row bank" id="row-bank">
+        <div class="money-icon">🏦</div>
+        <div class="money-info">
+          <div class="money-label">Banque</div>
+          <div class="money-value"><span id="bank">0</span><span class="money-currency">$</span></div>
+        </div>
+      </div>
+
+      <div class="money-row crypto" id="row-crypto">
+        <div class="money-icon">₿</div>
+        <div class="money-info">
+          <div class="money-label">Crypto</div>
+          <div class="money-value"><span id="crypto">0</span><span class="money-currency">SLC</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="health-bar">
+      <div class="hp-icon">❤</div>
+      <div class="hp-track">
+        <div class="hp-fill" id="hp-fill" style="width:100%"></div>
+      </div>
+      <div class="hp-value" id="hp-val">100</div>
+    </div>
+
+    <div class="fuel-bar hidden" id="fuel-bar">
+      <div class="fuel-icon">⛽</div>
+      <div class="fuel-track">
+        <div class="fuel-fill" id="fuel-fill" style="width:100%"></div>
+      </div>
+      <div class="fuel-value" id="fuel-val">100</div>
+    </div>
+  </div>
+
+  <!-- Indicateur menottes (independant du hud, en haut) -->
+  <div id="cuffs-indicator" class="cuffs-indicator hidden">
+    <span class="cuffs-icon">🔗</span><span>Menotté</span>
+  </div>
+
+  <!-- Overlay "A TERRE" plein ecran (independant du hud) -->
+  <div id="down-overlay" class="down-overlay hidden">
+    <div class="down-vignette"></div>
+    <div class="down-content">
+      <div class="down-title">À TERRE</div>
+      <div class="down-sub" id="down-sub">Vous êtes inconscient. Attendez les secours.</div>
+      <div class="down-bleed" id="down-bleed"></div>
+      <div class="down-timer" id="down-timer"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS sl_appearance (
+  character_id BIGINT UNSIGNED PRIMARY KEY,
+  model VARCHAR(64) NOT NULL DEFAULT 'mp_m_freemode_01',
+  components JSON NOT NULL,
+  props JSON NOT NULL,
+  head_blend JSON NULL,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (character_id) REFERENCES sl_characters(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

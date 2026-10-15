@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;800&family=Roboto+Condensed:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root" class="root hidden">
+
+    <!-- =================== SELECTOR SCREEN =================== -->
+    <div id="screen-select" class="screen">
+      <!-- Sidebar gauche : liste des slots -->
+      <aside class="side-list">
+        <div class="logo">
+          <div class="logo-emoji">⚜️</div>
+          <div class="logo-titles">
+            <div class="logo-name">SIMPLELIFE</div>
+            <div class="logo-sub">Los Santos</div>
+          </div>
+        </div>
+
+        <div class="slot-section">
+          <div class="section-title">PERSONNAGES</div>
+          <div id="char-slots"></div>
+        </div>
+
+        <footer class="side-foot">v0.1.0 · 2026</footer>
+      </aside>
+
+      <!-- Panneau central : détails du perso sélectionné -->
+      <main class="center-panel" id="char-details">
+        <div class="empty-state" id="char-empty">
+          <div class="empty-glyph">⊘</div>
+          <div class="empty-text">Sélectionne un personnage à gauche</div>
+          <div class="empty-sub">ou crée-en un nouveau</div>
+        </div>
+
+        <div class="char-info hidden" id="char-info">
+          <div class="char-info-name" id="char-info-name">—</div>
+          <div class="char-info-cid" id="char-info-cid">—</div>
+
+          <div class="char-info-stats">
+            <div class="stat-row"><span class="stat-k">Prénom</span><span class="stat-v" id="ci-firstName">—</span></div>
+            <div class="stat-row"><span class="stat-k">Nom</span><span class="stat-v" id="ci-lastName">—</span></div>
+            <div class="stat-row"><span class="stat-k">Naissance</span><span class="stat-v" id="ci-dob">—</span></div>
+            <div class="stat-row"><span class="stat-k">Âge</span><span class="stat-v" id="ci-age">—</span></div>
+            <div class="stat-row"><span class="stat-k">Sexe</span><span class="stat-v" id="ci-sex">—</span></div>
+            <div class="stat-row"><span class="stat-k">Nationalité</span><span class="stat-v" id="ci-nationality">—</span></div>
+          </div>
+
+          <div class="char-actions">
+            <button class="btn-play" id="btn-play">▶ JOUER</button>
+            <button class="btn-delete" id="btn-delete">🗑 Supprimer</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- =================== CREATION SCREEN =================== -->
+    <div id="screen-create" class="screen hidden">
+      <aside class="side-list">
+        <div class="logo">
+          <div class="logo-emoji">⚜️</div>
+          <div class="logo-titles">
+            <div class="logo-name">NOUVEAU CITOYEN</div>
+            <div class="logo-sub">Création d'identité</div>
+          </div>
+        </div>
+
+        <div class="slot-section">
+          <div class="section-title">FORMULAIRE</div>
+          <div class="form-wrap" id="form-wrap">
+
+            <div class="field">
+              <label>Prénom</label>
+              <input type="text" id="f-firstName" maxlength="30" placeholder="Jean" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label>Nom de famille</label>
+              <input type="text" id="f-lastName" maxlength="30" placeholder="Dupont" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label>Date de naissance</label>
+              <input type="date" id="f-dob" min="1935-01-01" max="2008-12-31">
+            </div>
+
+            <div class="field">
+              <label>Sexe</label>
+              <div class="sex-toggle">
+                <button class="sex-btn active" data-sex="m">♂ Homme</button>
+                <button class="sex-btn"        data-sex="f">♀ Femme</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Nationalité</label>
+              <select id="f-nationality"></select>
+            </div>
+
+          </div>
+        </div>
+
+        <footer class="side-foot">
+          <button class="btn-back" id="btn-back">‹ Retour</button>
+        </footer>
+      </aside>
+
+      <main class="center-panel">
+        <div class="create-hero">
+          <div class="hero-title">FORGER VOTRE IDENTITÉ</div>
+          <div class="hero-sub">Remplissez le formulaire à gauche pour donner vie à votre nouveau personnage à Los Santos.</div>
+        </div>
+
+        <div class="create-summary">
+          <div class="summary-row"><span class="sum-k">Nom complet</span><span class="sum-v" id="sum-name">—</span></div>
+          <div class="summary-row"><span class="sum-k">Né(e) le</span><span class="sum-v" id="sum-dob">—</span></div>
+          <div class="summary-row"><span class="sum-k">Sexe</span><span class="sum-v" id="sum-sex">—</span></div>
+          <div class="summary-row"><span class="sum-k">Origine</span><span class="sum-v" id="sum-nat">—</span></div>
+        </div>
+
+        <button class="btn-create" id="btn-create" disabled>CRÉER LE PERSONNAGE</button>
+      </main>
+    </div>
+
+    <!-- Toast host -->
+    <div id="toast-host"></div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

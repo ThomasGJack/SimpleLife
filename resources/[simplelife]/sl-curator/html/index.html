@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="hidden">
+    <header class="top">
+      <div class="brand">
+        <div class="brand-ico">🔥</div>
+        <div class="brand-meta">
+          <div class="brand-title">SimpleLife</div>
+          <div class="brand-sub">Curator</div>
+        </div>
+      </div>
+
+      <nav class="phase-tabs" id="phase-tabs"></nav>
+
+      <div class="mode-toggle">
+        <button class="mode-btn active" data-mode="normal" id="mode-normal">DÉCOUVERTE</button>
+        <button class="mode-btn" data-mode="review" id="mode-review">2ᵉ PASSE</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-key">Phase</div>
+          <div class="stat-val" id="stat-phase">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-key">Total</div>
+          <div class="stat-val" id="stat-total">0</div>
+        </div>
+        <div class="stat-item online" id="active-users-wrap">
+          <div class="stat-key">En ligne</div>
+          <div class="stat-val active" id="stat-active">
+            <span class="dot"></span>
+            <span id="active-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="esc" id="btn-close">FERMER</button>
+    </header>
+
+    <main class="main">
+      <section class="left">
+        <div class="card phase-card">
+          <div class="phase-title-num" id="phase-title-num">Phase 1</div>
+          <div class="phase-title" id="phase-title">Trio haut</div>
+          <div class="phase-desc" id="phase-desc">—</div>
+        </div>
+
+        <div class="card slots-card">
+          <div class="card-title">PIÈCES ACTIVES</div>
+          <ul class="slots" id="slots"></ul>
+        </div>
+
+        <div class="card tip-card">
+          <div class="card-title hint">RÈGLE</div>
+          <p>Si la tenue est bonne → <b class="ok">COMPATIBLE</b>.</p>
+          <p>Si bug → <b class="bad">SUIVANT</b> (on ne note rien, on génère une autre combo).</p>
+          <p>Seuls les ✓ sont sauvegardés en DB.</p>
+        </div>
+      </section>
+
+      <section class="right">
+        <div class="card keys-card">
+          <div class="card-title">RACCOURCIS</div>
+          <div class="keys">
+            <span><kbd>V</kbd> Compatible / Confirmer</span>
+            <span><kbd>R</kbd> ou <kbd>N</kbd> Suivant / Rejeter</span>
+            <span><kbd>T</kbd> Toggle mode (Découverte / 2ᵉ passe)</span>
+            <span><kbd>Z</kbd> Back (annuler)</span>
+            <span><kbd>1</kbd>..<kbd>4</kbd> Phase</span>
+            <span><kbd>←</kbd> <kbd>→</kbd> Tourner</span>
+            <span><kbd>↑</kbd> <kbd>↓</kbd> Zoom</span>
+            <span><kbd>Échap</kbd> Quitter</span>
+          </div>
+        </div>
+
+        <div class="big-actions" id="big-actions">
+          <button class="btn-mini" id="btn-back" disabled>↺ Back</button>
+          <button class="btn-next" id="btn-next">
+            <div class="btn-text" id="btn-next-text">SUIVANT</div>
+            <div class="btn-sub" id="btn-next-sub">Sans noter</div>
+          </button>
+          <button class="btn-yes" id="btn-yes">
+            <div class="btn-icon">✓</div>
+            <div class="btn-text" id="btn-yes-text">COMPATIBLE</div>
+            <div class="btn-sub" id="btn-yes-sub">Enregistre la tenue</div>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div id="banner-error" class="banner hidden"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sl-crafting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- =====================================================================
+     ROOT (masque par defaut)
+     ===================================================================== -->
+<div id="crafting-root" class="cr-root hidden">
+
+  <!-- Fond sombre semi-transparent -->
+  <div id="crafting-overlay" class="cr-overlay"></div>
+
+  <!-- Fenetre principale -->
+  <div class="cr-window">
+
+    <!-- HEADER -->
+    <div class="cr-head">
+      <div class="head-l">
+        <div class="head-title" id="bench-title">ETABLI</div>
+        <div class="head-sub" id="bench-sub">CRAFTING STATION</div>
+      </div>
+      <div class="head-r">
+        <button class="btn-x" id="btn-close" title="Fermer [Esc]">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- BODY : liste de recettes -->
+    <div class="cr-body" id="recipe-list">
+      <!-- Les cartes recettes sont injectees par JS -->
+    </div>
+
+    <!-- FOOTER -->
+    <div class="cr-foot">
+      <span class="foot-hint">
+        <span class="kbd">E</span> Fabriquer &nbsp;|&nbsp;
+        <span class="kbd">Esc</span> Fermer
+      </span>
+    </div>
+
+  </div><!-- /.cr-window -->
+
+</div><!-- /#crafting-root -->
+
+<!-- Toast host (au-dessus de tout) -->
+<div id="toast-host"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

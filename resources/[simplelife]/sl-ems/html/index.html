@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sl-ems MDT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ems-root" class="hidden">
+    <div class="ems-overlay" id="ems-overlay"></div>
+    <div class="ems-window">
+
+      <!-- HEADER -->
+      <div class="ems-header">
+        <div class="ems-header-left">
+          <span class="ems-header-icon">&#10010;</span>
+          <span class="ems-header-title">MDT MEDICAL</span>
+          <span class="ems-header-sub">Los Santos Emergency Services</span>
+        </div>
+        <div class="ems-header-right">
+          <span id="hdr-duty" class="duty-badge off">HORS SERVICE</span>
+          <button class="ems-close-btn" id="ems-close">&#10005;</button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="ems-tabs">
+        <button class="ems-tab active" data-tab="patients">Patients</button>
+        <button class="ems-tab" data-tab="diagnostic">Diagnostic</button>
+        <button class="ems-tab" data-tab="billing">Facturation</button>
+      </div>
+
+      <!-- BODY -->
+      <div class="ems-body">
+
+        <!-- TAB : Patients -->
+        <div class="ems-panel active" id="tab-patients">
+          <div class="panel-toolbar">
+            <button class="btn-refresh" id="btn-refresh-patients">Actualiser</button>
+            <span class="panel-hint">Joueurs actuellement a terre dans le serveur</span>
+          </div>
+          <div class="patient-list" id="patient-list">
+            <div class="empty-state" id="patients-empty">Aucun patient a terre.</div>
+          </div>
+        </div>
+
+        <!-- TAB : Diagnostic -->
+        <div class="ems-panel" id="tab-diagnostic">
+          <div class="panel-toolbar">
+            <input type="number" class="diag-input" id="diag-target" placeholder="ID joueur">
+            <button class="btn-action" id="btn-diag">Diagnostiquer</button>
+          </div>
+          <div class="diag-body" id="diag-body">
+            <div class="empty-state">Entrez un ID joueur et cliquez Diagnostiquer.</div>
+          </div>
+        </div>
+
+        <!-- TAB : Facturation -->
+        <div class="ems-panel" id="tab-billing">
+          <div class="panel-toolbar">
+            <input type="number" class="diag-input" id="bill-target" placeholder="ID joueur">
+            <input type="number" class="diag-input amount-input" id="bill-amount" placeholder="Montant $">
+            <button class="btn-action btn-gold" id="btn-bill">Facturer</button>
+          </div>
+          <div class="bill-history" id="bill-history">
+            <div class="empty-state">Facturez un patient ci-dessus.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TOAST -->
+      <div id="ems-toast-container"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

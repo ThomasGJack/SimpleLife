@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimpleLife — Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg">
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="bg-grid"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <div class="container">
+    <header class="hero">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c084fc"/>
+                <stop offset="50%" stop-color="#f472b6"/>
+                <stop offset="100%" stop-color="#fb923c"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4 L56 16 L56 40 Q56 50 32 60 Q8 50 8 40 L8 16 Z" fill="url(#logoGrad)" opacity="0.9"/>
+            <circle cx="32" cy="28" r="6" fill="#fff" opacity="0.95"/>
+            <path d="M22 44 Q32 36 42 44 Q42 50 32 52 Q22 50 22 44" fill="#fff" opacity="0.95"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="logo">SimpleLife</h1>
+          <p class="tagline">Roleplay sans limites</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="loader">
+      <div class="phase-wrapper">
+        <div class="phase-spinner">
+          <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(192,132,252,0.2)" stroke-width="3"/>
+            <circle cx="25" cy="25" r="20" fill="none" stroke="url(#spinnerGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="50 100" class="spinner-arc"/>
+            <defs>
+              <linearGradient id="spinnerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c084fc"/>
+                <stop offset="100%" stop-color="#f472b6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="phase" id="phase">Initialisation</div>
+      </div>
+
+      <div class="progress-wrapper">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-shimmer"></div>
+        </div>
+        <div class="progress-text" id="progress-text">0%</div>
+      </div>
+
+      <div class="sub-phase" id="sub-phase">Préparation des assets...</div>
+    </main>
+
+    <aside class="tips-card">
+      <div class="tip-header">
+        <span class="tip-icon">💡</span>
+        <span class="tip-label">ASTUCE</span>
+      </div>
+      <div class="tip-text" id="tip-text">Bienvenue sur SimpleLife — le RP modulaire.</div>
+    </aside>
+
+    <footer class="meta">
+      <div class="meta-left">
+        <span class="meta-version">SimpleLife V1</span>
+        <span class="meta-dot">•</span>
+        <span class="meta-build">Dev Build</span>
+      </div>
+      <div class="meta-right">
+        <span class="meta-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Serveur en ligne</span>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

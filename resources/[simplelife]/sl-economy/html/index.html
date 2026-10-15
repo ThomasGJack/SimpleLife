@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fleeca Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ROOT WINDOW -->
+<div id="atm-root" class="atm-root hidden">
+  <div id="atm-overlay" class="atm-overlay"></div>
+
+  <div class="atm-window">
+
+    <!-- HEADER -->
+    <div class="atm-head">
+      <div class="head-brand">
+        <span class="brand-icon">🏦</span>
+        <div>
+          <div class="head-title">FLEECA BANK</div>
+          <div class="head-sub">Services Financiers</div>
+        </div>
+      </div>
+      <div class="head-balances">
+        <div class="balance-card" id="card-cash">
+          <div class="bc-label">LIQUIDE</div>
+          <div class="bc-amount" id="bal-cash">0$</div>
+          <div class="bc-icon">💵</div>
+        </div>
+        <div class="balance-card" id="card-bank">
+          <div class="bc-label">COMPTE</div>
+          <div class="bc-amount" id="bal-bank">0$</div>
+          <div class="bc-icon">🏦</div>
+        </div>
+        <div class="balance-card" id="card-crypto">
+          <div class="bc-label">CRYPTO</div>
+          <div class="bc-amount" id="bal-crypto">0$</div>
+          <div class="bc-icon">₿</div>
+        </div>
+      </div>
+      <button class="btn-x" id="btn-close" title="Fermer (Echap)">✕</button>
+    </div>
+
+    <!-- TABS -->
+    <div class="atm-tabs">
+      <button class="atm-tab active" data-tab="deposit">DEPOT</button>
+      <button class="atm-tab" data-tab="withdraw">RETRAIT</button>
+      <button class="atm-tab" data-tab="transfer">VIREMENT</button>
+      <button class="atm-tab" data-tab="history">HISTORIQUE</button>
+    </div>
+
+    <!-- BODY -->
+    <div class="atm-body">
+
+      <!-- ===== DEPOT ===== -->
+      <div class="tab-panel active" id="panel-deposit">
+        <div class="panel-inner">
+          <div class="op-title">Déposer du liquide</div>
+          <div class="op-desc">Transfert de votre argent liquide vers votre compte bancaire.</div>
+          <div class="form-group">
+            <label class="form-label" for="deposit-amount">MONTANT ($)</label>
+            <div class="input-row">
+              <input class="form-input" type="number" id="deposit-amount" min="1" placeholder="Entrez un montant..." />
+              <button class="btn-max" id="deposit-max">MAX</button>
+            </div>
+            <div class="form-hint" id="deposit-hint">Disponible : <span id="deposit-avail">0$</span></div>
+          </div>
+          <div class="quick-amounts" id="deposit-quick"></div>
+          <button class="btn-action btn-green" id="btn-deposit">
+            <span>DEPOSER</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== RETRAIT ===== -->
+      <div class="tab-panel" id="panel-withdraw">
+        <div class="panel-inner">
+          <div class="op-title">Retirer de l'argent</div>
+          <div class="op-desc">Transfert de votre compte bancaire vers votre argent liquide.</div>
+          <div class="form-group">
+            <label class="form-label" for="withdraw-amount">MONTANT ($)</label>
+            <div class="input-row">
+              <input class="form-input" type="number" id="withdraw-amount" min="1" placeholder="Entrez un montant..." />
+              <button class="btn-max" id="withdraw-max">MAX</button>
+            </div>
+            <div class="form-hint" id="withdraw-hint">Disponible : <span id="withdraw-avail">0$</span></div>
+          </div>
+          <div class="quick-amounts" id="withdraw-quick"></div>
+          <button class="btn-action btn-gold" id="btn-withdraw">
+            <span>RETIRER</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== VIREMENT ===== -->
+      <div class="tab-panel" id="panel-transfer">
+        <div class="panel-inner">
+          <div class="op-title">Virement bancaire</div>
+          <div class="op-desc">Transférez des fonds vers le compte d'un autre joueur via son numéro de téléphone.</div>
+          <div class="form-group">
+            <label class="form-label" for="transfer-number">NUMERO DE TELEPHONE</label>
+            <input class="form-input" type="text" id="transfer-number" maxlength="12" placeholder="555-XXXX" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="transfer-amount">MONTANT ($)</label>
+            <div class="input-row">
+              <input class="form-input" type="number" id="transfer-amount" min="1" placeholder="Entrez un montant..." />
+              <button class="btn-max" id="transfer-max">MAX</button>
+            </div>
+            <div class="form-hint">Disponible (banque) : <span id="transfer-avail">0$</span></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="transfer-reason">MOTIF (optionnel)</label>
+            <input class="form-input" type="text" id="transfer-reason" maxlength="64" placeholder="Remboursement, loyer..." />
+          </div>
+          <button class="btn-action btn-blue" id="btn-transfer">
+            <span>ENVOYER</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== HISTORIQUE ===== -->
+      <div class="tab-panel" id="panel-history">
+        <div class="panel-inner panel-history">
+          <div class="history-header">
+            <div class="op-title">Historique des transactions</div>
+            <div class="history-filters">
+              <button class="hfilter active" data-acc="all">TOUT</button>
+              <button class="hfilter" data-acc="cash">LIQUIDE</button>
+              <button class="hfilter" data-acc="bank">COMPTE</button>
+              <button class="hfilter" data-acc="crypto">CRYPTO</button>
+            </div>
+          </div>
+          <div class="tx-list" id="tx-list">
+            <div class="tx-empty" id="tx-empty">Chargement...</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /atm-body -->
+
+    <!-- FOOTER -->
+    <div class="atm-foot">
+      <span class="foot-hint"><span class="kbd">ESC</span> Fermer</span>
+    </div>
+
+  </div><!-- /atm-window -->
+</div><!-- /atm-root -->
+
+<!-- TOAST HOST -->
+<div id="toast-host"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

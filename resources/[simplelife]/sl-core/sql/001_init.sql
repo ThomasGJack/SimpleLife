@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS sl_migrations (
+  filename VARCHAR(255) PRIMARY KEY,
+  resource VARCHAR(64) NOT NULL,
+  hash VARCHAR(64) NOT NULL,
+  applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_resource (resource)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sl_accounts (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  license VARCHAR(64) NOT NULL UNIQUE,
+  steam VARCHAR(64) NULL,
+  discord VARCHAR(64) NULL,
+  fivem_id VARCHAR(64) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  last_seen TIMESTAMP NULL,
+  INDEX idx_steam (steam),
+  INDEX idx_discord (discord)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sl_characters (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  account_id BIGINT UNSIGNED NOT NULL,
+  slot TINYINT UNSIGNED NOT NULL,
+  citizen_id CHAR(10) NOT NULL UNIQUE,
+  data JSON NOT NULL,
+  position JSON NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  deleted_at TIMESTAMP NULL,
+  FOREIGN KEY (account_id) REFERENCES sl_accounts(id) ON DELETE CASCADE,
+  UNIQUE KEY uniq_slot (account_id, slot),
+  INDEX idx_deleted (deleted_at),
+  INDEX idx_account (account_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sl_modules_registry (
+  name VARCHAR(64) PRIMARY KEY,
+  version VARCHAR(32) NOT NULL,
+  core_api INT NOT NULL,
+  loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

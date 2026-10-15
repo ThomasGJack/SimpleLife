@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- TOAST-HOST : notifications rendues PAR sl-inventory donc      -->
+  <!-- toujours visibles au-dessus de l'overlay quand la fenêtre     -->
+  <!-- inventaire est ouverte. Hors de #inv-root pour ne pas être    -->
+  <!-- caché par le .hidden de la racine.                            -->
+  <!-- ============================================================ -->
+  <div id="toast-host" aria-live="polite"></div>
+
+  <!-- ============================================================ -->
+  <!-- FENÊTRE INVENTAIRE (masquée par défaut)                       -->
+  <!-- ============================================================ -->
+  <div id="inv-root" class="inv-root hidden">
+    <div class="inv-overlay" id="inv-overlay"></div>
+
+    <div class="inv-window">
+
+      <!-- HEADER -->
+      <header class="inv-head">
+        <div class="head-l">
+          <div class="head-title">INVENTAIRE</div>
+          <div class="head-sub" id="char-name">—</div>
+        </div>
+        <div class="head-c">
+          <div class="weight">
+            <div class="weight-label">POIDS</div>
+            <div class="weight-track"><div class="weight-fill" id="weight-fill"></div></div>
+            <div class="weight-text"><span id="weight-cur">0</span>&nbsp;/&nbsp;<span id="weight-max">0</span>&nbsp;kg</div>
+          </div>
+        </div>
+        <div class="head-r">
+          <button class="btn-x" id="btn-close" title="Fermer (Esc)">✕</button>
+        </div>
+      </header>
+
+      <!-- BODY -->
+      <main class="inv-body">
+
+        <!-- ====== PAPER-DOLL ====== -->
+        <aside class="inv-paperdoll">
+          <div class="pd-title">ÉQUIPEMENT</div>
+          <div class="pd-grid">
+            <div class="pd-slot pd-top"     data-slot="201" data-kind="backpack">
+              <div class="pd-icon-placeholder">🎒</div>
+              <div class="cell-content"></div>
+              <div class="pd-label">SAC</div>
+            </div>
+
+            <div class="pd-slot pd-left"    data-slot="203" data-kind="phone">
+              <div class="pd-icon-placeholder">📱</div>
+              <div class="cell-content"></div>
+              <div class="pd-label">PHONE</div>
+            </div>
+
+            <div class="pd-character" id="pd-character">
+              <div class="pd-silhouette">
+                <!-- silhouette dessinée en CSS / SVG inline -->
+                <svg viewBox="0 0 100 200" width="100%" height="100%" aria-hidden="true">
+                  <circle cx="50" cy="32" r="18" fill="currentColor" opacity="0.35"/>
+                  <path d="M50 54 Q24 62 24 110 L24 150 Q24 158 32 158 L40 158 L40 195 L60 195 L60 158 L68 158 Q76 158 76 150 L76 110 Q76 62 50 54 Z" fill="currentColor" opacity="0.35"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="pd-slot pd-right"   data-slot="204" data-kind="radio">
+              <div class="pd-icon-placeholder">📻</div>
+              <div class="cell-content"></div>
+              <div class="pd-label">RADIO</div>
+            </div>
+
+            <div class="pd-slot pd-bottom-l" data-slot="202" data-kind="holster">
+              <div class="pd-icon-placeholder">🔫</div>
+              <div class="cell-content"></div>
+              <div class="pd-label">HOLSTER</div>
+            </div>
+
+            <div class="pd-slot pd-bottom-r" data-slot="205" data-kind="docs">
+              <div class="pd-icon-placeholder">🪪</div>
+              <div class="cell-content"></div>
+              <div class="pd-label">DOCS</div>
+            </div>
+          </div>
+
+          <div class="pd-hint">
+            Glisser un item dans un slot pour l'équiper.<br>
+            Le sac à dos augmente votre capacité.
+          </div>
+        </aside>
+
+        <!-- ====== GRILLE PRINCIPALE ====== -->
+        <section class="inv-grid-wrap">
+          <div class="grid-title">SAC PERSONNEL</div>
+          <div class="grid" id="grid"></div>
+          <div class="filters" id="filters"></div>
+        </section>
+
+        <!-- ====== NEARBY ====== -->
+        <aside class="inv-nearby">
+          <div class="nearby-head">À PROXIMITÉ</div>
+          <div class="nearby-empty" id="nearby-empty">
+            <div class="nearby-glyph">⊘</div>
+            <div class="nearby-text">Rien à proximité</div>
+          </div>
+          <div class="nearby-grid hidden" id="nearby-grid"></div>
+          <div class="nearby-hint">
+            Drops, coffres de véhicule, casiers maison — bientôt disponibles.
+          </div>
+        </aside>
+
+      </main>
+
+      <footer class="inv-foot">
+        <div class="foot-hint">
+          <span class="kbd">Clic</span> sélectionner&nbsp;·
+          <span class="kbd">Clic</span> sur un autre slot pour déplacer&nbsp;·
+          <span class="kbd">Clic droit</span> utiliser&nbsp;·
+          <span class="kbd">Maj+Clic</span> jeter&nbsp;·
+          <span class="kbd">H</span> holster&nbsp;·
+          <span class="kbd">Esc</span> fermer
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Tooltip flottante (rendue dans le body, suit le curseur) -->
+  <div id="tip" class="tip hidden">
+    <div class="tip-head">
+      <span class="tip-icon" id="tip-icon">📦</span>
+      <div class="tip-titles">
+        <div class="tip-name" id="tip-name">—</div>
+        <div class="tip-cat"  id="tip-cat">—</div>
+      </div>
+    </div>
+    <div class="tip-desc" id="tip-desc">—</div>
+    <div class="tip-stats">
+      <div class="tip-row"><span class="tip-k">POIDS UNIT.</span><span class="tip-v" id="tip-weight">—</span></div>
+      <div class="tip-row"><span class="tip-k">QUANTITÉ</span><span class="tip-v" id="tip-count">—</span></div>
+      <div class="tip-row"><span class="tip-k">TOTAL</span><span class="tip-v" id="tip-total">—</span></div>
+    </div>
+    <div class="tip-meta hidden" id="tip-meta-wrap">
+      <div class="tip-meta-title">MÉTADONNÉES</div>
+      <pre id="tip-meta">—</pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

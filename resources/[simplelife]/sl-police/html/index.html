@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sl-police MDT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== TOAST HOST ===== -->
+  <div id="toast-host"></div>
+
+  <!-- ===== MDT ROOT ===== -->
+  <div id="mdt-root" class="mdt-root hidden">
+    <div class="mdt-overlay" id="mdt-overlay"></div>
+    <div class="mdt-window">
+
+      <!-- HEADER -->
+      <div class="mdt-head">
+        <div class="head-l">
+          <div class="head-title">TERMINAL MDT</div>
+          <div class="head-sub">Mobile Data Terminal — LSPD</div>
+        </div>
+        <div class="head-c">
+          <div class="mdt-tabs">
+            <button class="mdt-tab active" data-tab="search">Recherche</button>
+            <button class="mdt-tab" data-tab="bolos">BOLO</button>
+            <button class="mdt-tab" data-tab="duty">En service</button>
+          </div>
+        </div>
+        <div class="head-r">
+          <button class="btn-x" id="mdt-close-btn">&#x2715;</button>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="mdt-body">
+
+        <!-- ===== ONGLET RECHERCHE ===== -->
+        <div class="mdt-panel active" id="panel-search">
+          <div class="search-bar">
+            <input type="text" id="search-input" class="mdt-input" placeholder="Nom, prenom ou ID citoyen...">
+            <button class="mdt-btn" id="search-btn">Rechercher</button>
+          </div>
+
+          <div id="search-results" class="results-list">
+            <div class="results-empty" id="search-empty">
+              <div class="empty-glyph">&#x1F50D;</div>
+              <div class="empty-text">Entrez un nom ou un ID citoyen</div>
+            </div>
+          </div>
+
+          <!-- Detail citoyen -->
+          <div id="citizen-detail" class="citizen-detail hidden">
+            <div class="detail-head">
+              <div class="detail-avatar">&#x1F464;</div>
+              <div class="detail-info">
+                <div class="detail-name" id="detail-name">—</div>
+                <div class="detail-czid" id="detail-czid">ID : —</div>
+                <div class="detail-fine" id="detail-fine">Amendes : $0</div>
+              </div>
+              <button class="mdt-btn mdt-btn-red" id="detail-back-btn">Retour</button>
+            </div>
+            <div class="detail-charges-title">
+              <span class="section-label">Charges</span>
+            </div>
+            <div id="detail-charges" class="charges-list"></div>
+            <div class="detail-add-charge">
+              <select id="charge-select" class="mdt-select">
+                <option value="">-- Charge predefinies --</option>
+              </select>
+              <input type="number" id="charge-fine" class="mdt-input mdt-input-sm" placeholder="Montant $" min="0">
+              <input type="text" id="charge-label" class="mdt-input" placeholder="Motif personnalise...">
+              <button class="mdt-btn" id="charge-add-btn">Ajouter la charge</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ONGLET BOLO ===== -->
+        <div class="mdt-panel" id="panel-bolos">
+          <div class="bolo-add">
+            <input type="text" id="bolo-czid" class="mdt-input mdt-input-sm" placeholder="ID Citoyen">
+            <input type="text" id="bolo-reason" class="mdt-input" placeholder="Raison du BOLO...">
+            <button class="mdt-btn" id="bolo-add-btn">Emettre BOLO</button>
+          </div>
+          <div id="bolo-list" class="bolo-list">
+            <div class="results-empty" id="bolo-empty">
+              <div class="empty-glyph">&#x26A0;</div>
+              <div class="empty-text">Aucun BOLO actif</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== ONGLET EN SERVICE ===== -->
+        <div class="mdt-panel" id="panel-duty">
+          <div class="duty-header">
+            <span class="section-label">Membres de la police en service</span>
+            <button class="mdt-btn mdt-btn-sm" id="duty-refresh-btn">Actualiser</button>
+          </div>
+          <div id="duty-list" class="duty-list">
+            <div class="results-empty" id="duty-empty">
+              <div class="empty-glyph">&#x1F46E;</div>
+              <div class="empty-text">Aucun officier en service</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /mdt-body -->
+
+      <!-- FOOTER -->
+      <div class="mdt-foot">
+        <span class="foot-hint">
+          <span class="kbd">Echap</span> Fermer
+          &nbsp;&bull;&nbsp;
+          <span class="kbd">Clic</span> Selectionner
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOUILLE ROOT ===== -->
+  <div id="search-root" class="search-root hidden">
+    <div class="mdt-overlay" id="search-overlay"></div>
+    <div class="search-window">
+      <div class="mdt-head">
+        <div class="head-l">
+          <div class="head-title">FOUILLE</div>
+          <div class="head-sub" id="search-target-label">Inventaire du suspect</div>
+        </div>
+        <div class="head-r">
+          <button class="btn-x" id="search-close-btn">&#x2715;</button>
+        </div>
+      </div>
+      <div class="search-body" id="search-items-list">
+        <div class="results-empty">
+          <div class="empty-glyph">&#x1F4E6;</div>
+          <div class="empty-text">Inventaire vide</div>
+        </div>
+      </div>
+      <div class="mdt-foot">
+        <span class="foot-hint">
+          <span class="kbd">Clic</span> Saisir l item
+          &nbsp;&bull;&nbsp;
+          <span class="kbd">Echap</span> Fermer
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

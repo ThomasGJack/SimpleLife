@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="hidden">
+    <header class="store-header">
+      <div class="brand-area">
+        <div class="brand-logo">S</div>
+        <div class="brand-title">
+          <span class="brand-1">SimpleLife</span>
+          <span class="brand-2">Boutique</span>
+        </div>
+      </div>
+      <nav class="tabs" id="tabs"></nav>
+      <button class="btn-esc" id="btn-esc">ÉCHAP</button>
+    </header>
+
+    <aside class="left-panel">
+      <div class="left-head">
+        <div class="cat-name" id="cat-name">Torse</div>
+        <div class="cat-count" id="cat-count">— / —</div>
+      </div>
+      <div class="items-list" id="items-list"></div>
+      <div class="left-foot">
+        <div class="compat-row" id="compat-row">
+          <label>
+            <input type="checkbox" id="compat-check" />
+            <span id="compat-label">Compatibles uniquement</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <main class="center">
+      <div class="center-bottom">
+        <div class="hint left">
+          <kbd>Q</kbd> <span>Tourner la caméra</span>
+        </div>
+        <div class="hint variation" id="variation-bar">
+          <button class="step" id="prev-tex">‹</button>
+          <span class="variation-label">Variation <span id="variation-num">#0</span></span>
+          <button class="step" id="next-tex">›</button>
+        </div>
+        <div class="hint right">
+          <span>Cliquer un modèle à gauche</span>
+        </div>
+      </div>
+
+      <div class="cam-controls">
+        <button class="cam-btn active" id="cam-rotate" title="Rotation auto">⟳</button>
+        <button class="cam-btn" id="cam-zoom-in" title="Zoom +">+</button>
+        <button class="cam-btn" id="cam-zoom-out" title="Zoom −">−</button>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <div class="outfit-presets">
+        <div class="presets-title">TENUES PRÊTES</div>
+        <div class="presets-list" id="presets-list"></div>
+      </div>
+
+      <div class="total-block">
+        <div class="total-label">Prix Total</div>
+        <div class="total-amount" id="total-amount">0 $</div>
+      </div>
+
+      <div class="cart-block">
+        <div class="cart-title">PANIER <span class="cart-count" id="cart-count">0</span></div>
+        <div class="cart-items" id="cart-items">
+          <div class="cart-empty">Sélectionne un article à gauche</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-cancel" id="btn-cancel">ANNULER</button>
+        <button class="btn-buy" id="btn-buy">ACHETER LE PANIER</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
